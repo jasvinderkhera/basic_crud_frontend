@@ -1,0 +1,11 @@
+.container{
+    width: 100%;
+}
+
+.input{
+    border: none;
+    border-bottom: 1px solid red;
+}
+.ql-editor{
+    min-height: 400px;
+}

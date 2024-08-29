@@ -1,0 +1,8 @@
+.container{
+    width: 100%;
+}
+
+
+.jodit-wysiwyg{
+    min-height: 400px !important;
+}
