@@ -31,11 +31,12 @@ function EmployeesList() {
 
   let employeeData = async () => {
     try {
-      let data = await getEmployees();
+      let res = await getEmployees();
       if (res && res.data.responseCode === 401) {
         toast.error(res.data.errMessage);
       } else if (res && res.data.responseCode === 200) {
-        setEmployeesList(data.data.data);
+        toast.success(res.data.resMessage)
+        setEmployeesList(res.data.data);
       } else if (res && res.data.responseCode === 400) {
         toast.error(res.data.errMessage);
       } else {
@@ -45,10 +46,11 @@ function EmployeesList() {
       console.log(error);
     }
   };
-
+  
   let createNewEmployee = async (form_data) => {
     try {
       let res = await createEmployee(form_data);
+      console.log("res", res)
       if (res && res.data.responseCode === 401) {
         toast.error(res.data.errMessage);
       } else if (res && res.status === 201) {
@@ -245,7 +247,7 @@ function EmployeesList() {
         {employeesList.length !== 0 ? (
           employeesList.map((item) => {
             return (
-              <div className="list-group list-group-horizontal my-3">
+              <div className="list-group list-group-horizontal my-3" key={item._id}>
                 <div className="list-group-item flex-fill">{item.name}</div>
                 <div className="list-group-item flex-fill">
                   {item.department}
