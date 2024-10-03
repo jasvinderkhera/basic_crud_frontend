@@ -32,8 +32,15 @@ function EmployeesList() {
   let employeeData = async () => {
     try {
       let data = await getEmployees();
-      setEmployeesList(data.data.data);
-      console.log("data", data);
+      if (res && res.data.responseCode === 401) {
+        toast.error(res.data.errMessage);
+      } else if (res && res.data.responseCode === 200) {
+        setEmployeesList(data.data.data);
+      } else if (res && res.data.responseCode === 400) {
+        toast.error(res.data.errMessage);
+      } else {
+        toast.error("Something went wrong...");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -42,6 +49,16 @@ function EmployeesList() {
   let createNewEmployee = async (form_data) => {
     try {
       let res = await createEmployee(form_data);
+      if (res && res.data.responseCode === 401) {
+        toast.error(res.data.errMessage);
+      } else if (res && res.status === 201) {
+        toast.success(res.data.resMessage);
+      } else if (res && res.status === 400) {
+        // console.log("error")
+        toast.error(res.data.errMessage);
+      } else {
+        toast.error("Something went wrong...");
+      }
       return res;
     } catch (error) {
       console.log(error);
@@ -52,8 +69,16 @@ function EmployeesList() {
     // console.log(id)
     try {
       let res = await deleteEmployee(id);
-      if (res.data.responseCode == 200) {
+
+      if (res && res.data.responseCode === 401) {
+        toast.error(res.data.errMessage);
+      } else if (res && res.data.responseCode === 200) {
+        toast.success(res.data.resMessage);
         employeeData();
+      } else if (res && res.data.responseCode === 400) {
+        toast.error(res.data.errMessage);
+      } else {
+        toast.error("Something went wrong..");
       }
       console.log(res);
       return res;
@@ -64,9 +89,17 @@ function EmployeesList() {
 
   let editEmployee = async (form_data) => {
     try {
-      let res =  await updateEmployee(form_data);
-      if(res.data.responseCode === 200){
-        employeeData()
+      let res = await updateEmployee(form_data);
+      if (res && res.data.responseCode === 401) {
+        toast.error(res.data.errMessage);
+      } else if (res && res.status === 200) {
+        toast.success(res.data.resMessage);
+        employeeData();
+      } else if (res && res.status === 400) {
+        // console.log("error")
+        toast.error(res.data.errMessage);
+      } else {
+        toast.error("Something went wrong...");
       }
     } catch (error) {
       console.log(error);
@@ -79,11 +112,11 @@ function EmployeesList() {
 
     onSubmit: async (values, action) => {
       if (values._id !== "") {
-         editEmployee(values);
+        editEmployee(values);
       } else {
-         createNewEmployee(values);
+        createNewEmployee(values);
       }
-      setForm_data(initialState)
+      setForm_data(initialState);
       employeeData();
     },
     enableReinitialize: true,
