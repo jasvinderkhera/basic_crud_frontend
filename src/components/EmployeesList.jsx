@@ -33,7 +33,7 @@ function EmployeesList() {
     try {
       let data = await getEmployees();
       setEmployeesList(data.data.data);
-      // console.log("data", data);
+      console.log("data", data);
     } catch (error) {
       console.log(error);
     }

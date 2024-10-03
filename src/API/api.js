@@ -1,11 +1,12 @@
 import axios from 'axios'
+let backendUrl = process.env.BACKEND_URL;
 
 
 // -------------------------------Get Employees--------------------------------------------------------------------------------------
 
 export const getEmployees = async () => {
    try {
-      let response = await axios.get(`${process.env.BACKEND_URL}/api/all-employees`)
+      let response = await axios.get(`${backendUrl}/api/all-employees`)
       // console.log("Response", response)
       return response
 
@@ -25,7 +26,7 @@ export const getEmployees = async () => {
 
 export const createEmployee = async (form_data) => {
    try {
-      let response = await axios.post(`${process.env.BACKEND_URL}/api/create-employee`, {
+      let response = await axios.post(`${backendUrl}/api/create-employee`, {
          name: form_data.name,
          email: form_data.email,
          phone: form_data.phone,
@@ -48,7 +49,7 @@ export const createEmployee = async (form_data) => {
 
 export const deleteEmployee = async (employee_id) => {
    try {
-      let response = await axios.delete(`${process.env.BACKEND_URL}/api/delete-employee?employeeId=${employee_id}`)
+      let response = await axios.delete(`${backendUrl}/api/delete-employee?employeeId=${employee_id}`)
       return response
 
    } catch (error) {
@@ -64,7 +65,7 @@ export const deleteEmployee = async (employee_id) => {
 
 export const updateEmployee = async (form_data) => {
    try {
-      let response = await axios.put(`${process.env.BACKEND_URL}/api/edit-employee`, {
+      let response = await axios.put(`${backendUrl}/api/edit-employee`, {
          employeeId: form_data._id,
          name: form_data.name,
          email: form_data.email,
