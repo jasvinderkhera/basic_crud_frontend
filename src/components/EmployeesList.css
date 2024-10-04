@@ -7,3 +7,20 @@
     width: 500px;
     margin: 30px auto;
 }
+.form_error {
+    color: red;
+}
+
+
+@media screen and (max-width:768px) {
+    .form_container{
+        width: 100%;
+    }
+    .employees_section{
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .main_container{
+        margin: 20px;
+    }
+}

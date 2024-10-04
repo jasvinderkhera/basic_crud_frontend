@@ -128,21 +128,34 @@ function EmployeesList() {
   // console.log("formData", formik.values.designation);
 
   return (
-    <div>
+    <div className="main_container">
       <div className="container form_container">
-        <h1>Form</h1>
+        <h1 className="text-center">Form</h1>
         <div className="mb-3">
           <label htmlFor="name">Name</label>
           <input
             type="text"
             name="name"
             id="name"
-            className="form-control"
+            className={`form-control ${
+              formik.errors.name && formik.touched.name
+                  ? 'border border-danger '
+                  : ''
+          }`}
+          style={{
+            borderColor:
+                formik.errors.name && formik.touched.name
+                    ? 'red'
+                    : '',
+        }}
             placeholder="Enter Name"
             value={formik.values.name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
+           {formik.errors.name && formik.touched.name ? (
+            <p className="form_error">{formik.errors.name}</p>
+          ) : null}
         </div>
         <div className="mb-3">
           <label htmlFor="name">Phone</label>
@@ -150,14 +163,25 @@ function EmployeesList() {
             type="tel"
             name="phone"
             id="phone"
-            className="form-control"
+            className={`form-control ${
+              formik.errors.phone && formik.touched.phone
+                  ? 'border border-danger '
+                  : ''
+          }`}
+          style={{
+            borderColor:
+                formik.errors.phone && formik.touched.phone
+                    ? 'red'
+                    : '',
+        }}
             placeholder="Enter Phone"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.phone}
+            
           />
-          {formik.errors.name && formik.touched.name ? (
-            <p className="form_error">{formik.errors.name}</p>
+          {formik.errors.phone && formik.touched.phone ? (
+            <p className="form_error">{formik.errors.phone}</p>
           ) : null}
         </div>
         <div className="mb-3">
@@ -166,7 +190,17 @@ function EmployeesList() {
             type="email"
             name="email"
             id="email"
-            className="form-control"
+            className={`form-control ${
+              formik.errors.email && formik.touched.email
+                  ? 'border border-danger '
+                  : ''
+          }`}
+          style={{
+            borderColor:
+                formik.errors.email && formik.touched.email
+                    ? 'red'
+                    : '',
+        }}
             placeholder="Enter Email Address"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -182,7 +216,17 @@ function EmployeesList() {
             type="text"
             name="designation"
             id="designation"
-            className="form-control"
+            className={`form-control ${
+              formik.errors.designation && formik.touched.designation
+                  ? 'border border-danger '
+                  : ''
+          }`}
+          style={{
+            borderColor:
+                formik.errors.designation && formik.touched.designation
+                    ? 'red'
+                    : '',
+        }}
             placeholder="Enter Designation"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -198,7 +242,17 @@ function EmployeesList() {
             type="text"
             name="department"
             id="department"
-            className="form-control"
+            className={`form-control ${
+              formik.errors.department && formik.touched.department
+                  ? 'border border-danger '
+                  : ''
+          }`}
+          style={{
+            borderColor:
+                formik.errors.department && formik.touched.department
+                    ? 'red'
+                    : '',
+        }}
             placeholder="Enter Department"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -214,7 +268,17 @@ function EmployeesList() {
             type="number"
             name="salary"
             id="salary"
-            className="form-control"
+            className={`form-control ${
+              formik.errors.salary && formik.touched.salary
+                  ? 'border border-danger '
+                  : ''
+          }`}
+          style={{
+            borderColor:
+                formik.errors.salary && formik.touched.salary
+                    ? 'red'
+                    : '',
+        }}
             placeholder="Enter Salary"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -230,7 +294,17 @@ function EmployeesList() {
             type="date"
             name="date_of_joining"
             id="date_of_joining"
-            className="form-control"
+            className={`form-control ${
+              formik.errors.date_of_joining && formik.touched.date_of_joining
+                  ? 'border border-danger '
+                  : ''
+          }`}
+          style={{
+            borderColor:
+                formik.errors.date_of_joining && formik.touched.date_of_joining
+                    ? 'red'
+                    : '',
+        }}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.date_of_joining}
@@ -239,17 +313,17 @@ function EmployeesList() {
             <p className="form_error">{formik.errors.date_of_joining}</p>
           ) : null}
         </div>
-        <button onClick={formik.handleSubmit} className="text-center">
+        <button onClick={formik.handleSubmit} className="btn btn-primary">
           Create Employee
         </button>
       </div>
 
-      <div className="employees_section">
         <h2 className="text-center">Employees List</h2>
+      <div className="employees_section">
         {employeesList.length !== 0 ? (
           employeesList.map((item) => {
             return (
-              <div className="list-group list-group-horizontal my-3" key={item._id}>
+              <div className="list-group list-group-horizontal my-3 mb-2" key={item._id}>
                 <div className="list-group-item flex-fill">{item.name}</div>
                 <div className="list-group-item flex-fill">
                   {item.department}
@@ -262,13 +336,13 @@ function EmployeesList() {
                 <div className="list-group-item flex-fill">{item.salary}</div>
                 <div className="list-group-item">
                   <button
-                    className="btn btn-danger ms-3"
+                    className="btn btn-danger ms-3 mb-2"
                     onClick={() => removeEmployee(item._id)}
                   >
                     Delete
                   </button>
                   <button
-                    className="btn btn-warning ms-3"
+                    className="btn btn-warning ms-3 mb-2"
                     onClick={() => setForm_data(item)}
                   >
                     Update
