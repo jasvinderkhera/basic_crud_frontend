@@ -5,11 +5,18 @@
 
 .form_container{
     width: 500px;
-    margin: 30px auto;
+    margin: 50px auto;
 }
 .form_error {
     color: red;
 }
+table, tr{
+    border: 1px solid;
+}
+tr,td,th{
+    padding: 10px 20px;
+}
+
 
 
 @media screen and (max-width:768px) {

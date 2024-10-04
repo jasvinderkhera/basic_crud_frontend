@@ -130,7 +130,7 @@ function EmployeesList() {
   return (
     <div className="main_container">
       <div className="container form_container">
-        <h1 className="text-center">Form</h1>
+        <h1 className="text-center">CRUD Form</h1>
         <div className="mb-3">
           <label htmlFor="name">Name</label>
           <input
@@ -320,21 +320,37 @@ function EmployeesList() {
 
         <h2 className="text-center">Employees List</h2>
       <div className="employees_section">
-        {employeesList.length !== 0 ? (
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Department</th>
+              <th>Designation</th>
+              <th>Salary</th>
+              <th>Date of Joining</th>
+              <th className="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          {employeesList.length !== 0 ? (
           employeesList.map((item) => {
             return (
-              <div className="list-group list-group-horizontal my-3 mb-2" key={item._id}>
-                <div className="list-group-item flex-fill">{item.name}</div>
-                <div className="list-group-item flex-fill">
+              <tr className="my-3 mb-2" key={item._id}>
+                <td className="">{item.name}</td>
+                <td className="">{item.email}</td>
+                <td className="">{item.phone}</td>
+                <td className="">
                   {item.department}
-                </div>
-                <div className="list-group-item flex-fill">
+                </td>
+                <td className="">
                   {item.designation}
-                </div>
-                <div className="list-group-item flex-fill">{item.email}</div>
-                <div className="list-group-item flex-fill">{item.phone}</div>
-                <div className="list-group-item flex-fill">{item.salary}</div>
-                <div className="list-group-item">
+                </td>
+                
+                <td className="">{item.salary}</td>
+                <td className="">{item.date_of_joining}</td>
+                <td className="">
                   <button
                     className="btn btn-danger ms-3 mb-2"
                     onClick={() => removeEmployee(item._id)}
@@ -347,13 +363,16 @@ function EmployeesList() {
                   >
                     Update
                   </button>
-                </div>
-              </div>
+                </td>
+              </tr>
             );
           })
         ) : (
           <h1 className="text-center mx-auto my-5">Not Found...</h1>
         )}
+          </tbody>
+        </table>
+       
       </div>
     </div>
   );
