@@ -37,6 +37,7 @@ export const createEmployee = async (form_data) => {
       return response
    } catch (error) {
       console.log(error)
+      return error.response
    }
 }
 
@@ -53,6 +54,7 @@ export const deleteEmployee = async (employee_id) => {
 
    } catch (error) {
       console.log(error)
+      return error.response
    }
 }
 
@@ -78,5 +80,6 @@ export const updateEmployee = async (form_data) => {
 
    } catch (error) {
       console.log(error)
+      return error.response
    }
 }

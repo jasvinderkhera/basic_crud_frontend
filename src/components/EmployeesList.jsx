@@ -35,7 +35,7 @@ function EmployeesList() {
       if (res && res.data.responseCode === 401) {
         toast.error(res.data.errMessage);
       } else if (res && res.data.responseCode === 200) {
-        toast.success(res.data.resMessage)
+        // toast.success(res.data.resMessage)
         setEmployeesList(res.data.data);
       } else if (res && res.data.responseCode === 400) {
         toast.error(res.data.errMessage);
@@ -53,9 +53,9 @@ function EmployeesList() {
       console.log("res", res)
       if (res && res.data.responseCode === 401) {
         toast.error(res.data.errMessage);
-      } else if (res && res.status === 201) {
+      } else if (res && res.data.responseCode === 201) {
         toast.success(res.data.resMessage);
-      } else if (res && res.status === 400) {
+      } else if (res && res.data.responseCode === 400) {
         // console.log("error")
         toast.error(res.data.errMessage);
       } else {
@@ -114,8 +114,10 @@ function EmployeesList() {
 
     onSubmit: async (values, action) => {
       if (values._id !== "") {
+        console.log("values")
         editEmployee(values);
       } else {
+        console.log("string")
         createNewEmployee(values);
       }
       setForm_data(initialState);
@@ -145,7 +147,7 @@ function EmployeesList() {
         <div className="mb-3">
           <label htmlFor="name">Phone</label>
           <input
-            type="number"
+            type="tel"
             name="phone"
             id="phone"
             className="form-control"
